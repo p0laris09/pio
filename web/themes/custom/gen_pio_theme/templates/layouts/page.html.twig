@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html{{ html_attributes }}>
+    <link rel="stylesheet" href="{{ base_path ~ directory }}/assets/third_party/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ base_path ~ directory }}/assets/third_party/fontawesome/css/all.css">
+    <link rel="stylesheet" href="{{ base_path ~ directory }}/assets/css/custom_styles.css">
+    <link rel="stylesheet" href="{{ base_path ~ directory }}/themes/custom/gen_pio_theme/css/theme_styles.css">
+    <script src="{{ base_path ~ directory }}/assets/third_party/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ base_path ~ directory }}/assets/js/custom_scripts.js"></script>
+    
+<head>
+  <head-placeholder token="{{ placeholder_token }}">
+    <title>{{ head_title|safe_join(' | ') }}</title>
+    {{ head }}
+    {{ styles }}
+    {{ scripts }}
+  </head>
+<body{{ attributes }}>
+  {{ page_top }}
+
+  <div id="page-wrapper">
+    <div id="page">
+      {# Header Region #}
+      {% if page.header %}
+        <div class="main print_hide">
+        <div class="header">
+            <div class="container-fluid">
+            <div class="row">
+                <div class="head-title">
+                {% if content.field_logo %}
+                    {{ content.field_logo }}
+                {% endif %}
+                <h1>
+                    <small>{{ content.field_subtitle }}</small><br>
+                    {{ content.field_title }}
+                </h1>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+      {% else %}
+      <div>No Navigation Block</div>
+      {% endif %}
+
+      {# Navigation (Primary Menu) #}
+      {% if page.navigation %}
+      <div class="nav-ct">
+          <nav class="navbar navbar-expand-lg">
+              <div class="container-fluid">
+                  <button class="d-lg-none navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+                      aria-expanded="false" aria-label="Toggle navigation">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="collapsibleNavId">
+                      {{ page.navigation }}
+                  </div>
+              </div>
+          </nav>
+      </div>
+      {% endif %}
+
+
+      {# Breadcrumb #}
+      {% if breadcrumb %}
+        <div id="breadcrumb">
+          {{ breadcrumb }}
+        </div>
+      {% endif %}
+
+      {# Messages (Status, Error, or Warning messages) #}
+      {{ page.messages }}
+
+      {# Content Region #}
+      <main id="content" role="main">
+        <a id="main-content"></a>
+        {{ page.content }}
+      </main>
+
+      {# Sidebar Regions #}
+      {% if page.sidebar_first %}
+        <aside id="sidebar-first">
+          {{ page.sidebar_first }}
+        </aside>
+      {% endif %}
+
+      {% if page.sidebar_second %}
+        <aside id="sidebar-second">
+          {{ page.sidebar_second }}
+        </aside>
+      {% endif %}
+
+      {# Footer Region #}
+      {% if page.footer %}
+        <footer id="footer">
+          {{ page.footer }}
+        </footer>
+      {% endif %}
+
+    </div>
+  </div>
+
+  {{ page_bottom }}
+  {{ scripts }}
+</body>
+</html>
